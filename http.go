@@ -1,10 +1,11 @@
 package main
 
 import (
-  "os"
+  "encoding/json"
   "fmt"
-  "net/http"
   "log"
+  "net/http"
+  "os"
 )
 
 func main() {
@@ -16,8 +17,14 @@ func main() {
     fmt.Fprintf(os.Stdout, "Listening on :%s\n", port)
     hostname, _ := os.Hostname()
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-        fmt.Fprintf(os.Stdout, "I'm %s\n", hostname)
- 	fmt.Fprintf(w, "I'm %s\n", hostname)
+
+        fmt.Fprintf(os.Stdout, "I’m %s\n", hostname)
+
+        // just to demo handling json in go
+        response := map[string]string{"hostname": hostname}
+        response_bytes, _ := json.Marshal(response)
+ 	    w.Write(response_bytes)
+
     })
 
 
