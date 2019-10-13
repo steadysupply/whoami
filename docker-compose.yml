@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+  main:
+    build:
+      context: .
+    environment:
+      NAME: whoami-A
+    ports:
+      - 8000
