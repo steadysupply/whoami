@@ -14,7 +14,7 @@ func main() {
         port = "8080"
     }
 
-    fmt.Fprintf(os.Stdout, "Listening on :%s\n", port)
+    fmt.Fprintf(os.Stdout, "port :%s\n", port)
     hostname, _ := os.Hostname()
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
 
@@ -22,6 +22,7 @@ func main() {
         response := map[string]string{
             "name": os.Getenv("NAME"),
             "hostname": hostname,
+            "build": "1",
         }
         response_bytes, _ := json.Marshal(response)
         fmt.Fprintf(os.Stdout, "sent %s\n", response_bytes)
